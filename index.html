@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>QR Transfer — Send data without internet</title>
+<meta name="description" content="Move text, links, and files between two nearby devices using only QR codes. No internet, no cloud, no account.">
+<meta name="theme-color" content="#2451FF">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;650&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<div class="app-shell" id="appShell">
+
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-mark" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="2" y="2" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="2"/>
+        <rect x="14" y="2" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="2"/>
+        <rect x="2" y="14" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="2"/>
+        <rect x="15" y="15" width="2.4" height="2.4" fill="currentColor"/>
+        <rect x="19" y="15" width="2.4" height="2.4" fill="currentColor"/>
+        <rect x="15" y="19" width="2.4" height="2.4" fill="currentColor"/>
+        <rect x="19" y="19" width="2.4" height="2.4" fill="currentColor"/>
+      </svg>
+      <span>QR Transfer</span>
+    </div>
+    <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+    </button>
+  </header>
+
+  <main id="mainContent">
+
+    <!-- ============ HOME ============ -->
+    <section class="view active" id="view-home" aria-labelledby="homeHeading">
+      <div class="hero">
+        <h1 id="homeHeading">Transfer data without internet.</h1>
+        <p>Scan. Transfer. Done. Everything happens directly between two devices, through the camera — nothing touches a server.</p>
+      </div>
+
+      <div class="action-grid">
+        <button class="action-tile bracket-frame" data-nav="send" aria-describedby="sendSub">
+          <span class="bl"></span><span class="br"></span>
+          <span class="glyph"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><path d="M14 15h7M17.5 11.5v7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <span class="label">Send data</span>
+          <span class="sub" id="sendSub">Turn text or a file into QR codes</span>
+        </button>
+        <button class="action-tile bracket-frame" data-nav="receive" aria-describedby="recvSub">
+          <span class="bl"></span><span class="br"></span>
+          <span class="glyph"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 8V5a1 1 0 0 1 1-1h3M20 8V5a1 1 0 0 0-1-1h-3M4 16v3a1 1 0 0 0 1 1h3M20 16v3a1 1 0 0 1-1 1h-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="2"/></svg></span>
+          <span class="label">Receive data</span>
+          <span class="sub" id="recvSub">Scan QR codes with your camera</span>
+        </button>
+      </div>
+
+      <div class="privacy-strip">
+        <span class="pill"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>100% client-side</span>
+        <span class="pill"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>No internet needed</span>
+        <span class="pill"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Nothing stored in a cloud</span>
+      </div>
+
+      <h2 class="section-title">How it works</h2>
+      <ol class="steps">
+        <li data-n="1"><strong>Pick data</strong> on the sending device — text, a link, or a file.</li>
+        <li data-n="2"><strong>QR codes appear</strong> on screen, one after another if the data is large.</li>
+        <li data-n="3"><strong>Point the other device's camera</strong> at the screen to scan.</li>
+        <li data-n="4"><strong>It's reassembled and checked</strong> automatically, then ready to open.</li>
+      </ol>
+
+      <h2 class="section-title">Works well for</h2>
+      <div class="chip-row">
+        <span class="chip">Phone → phone</span>
+        <span class="chip">Laptop → phone</span>
+        <span class="chip">Notes &amp; messages</span>
+        <span class="chip">Links</span>
+        <span class="chip">Photos</span>
+        <span class="chip">Small documents</span>
+        <span class="chip">Contact cards</span>
+      </div>
+
+      <div class="banner info" id="offlineBanner" role="status">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 8v5M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span id="offlineBannerText">Checking whether this page is cached for offline use…</span>
+      </div>
+    </section>
+
+    <!-- ============ SEND ============ -->
+    <section class="view" id="view-send" aria-labelledby="sendHeading">
+      <div class="view-header">
+        <button class="back-btn" data-nav="home" aria-label="Back">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <h2 id="sendHeading">Send data</h2>
+      </div>
+
+      <div class="tab-row" role="tablist" aria-label="Data type">
+        <button class="tab-btn active" data-type="text" role="tab" aria-selected="true">Text</button>
+        <button class="tab-btn" data-type="url" role="tab" aria-selected="false">Link</button>
+        <button class="tab-btn" data-type="file" role="tab" aria-selected="false">File</button>
+        <button class="tab-btn" data-type="contact" role="tab" aria-selected="false">Contact</button>
+      </div>
+
+      <!-- Text panel -->
+      <div class="send-panel" data-panel="text">
+        <div class="field">
+          <label class="field-label" for="textInput">Message or note</label>
+          <textarea id="textInput" placeholder="Type or paste what you want to send…"></textarea>
+          <div class="field-hint"><span id="textCount">0</span> characters</div>
+        </div>
+      </div>
+
+      <!-- URL panel -->
+      <div class="send-panel hidden" data-panel="url">
+        <div class="field">
+          <label class="field-label" for="urlInput">Website link</label>
+          <input type="url" id="urlInput" placeholder="https://example.com">
+        </div>
+      </div>
+
+      <!-- Contact panel -->
+      <div class="send-panel hidden" data-panel="contact">
+        <div class="field">
+          <label class="field-label" for="contactName">Name</label>
+          <input type="text" id="contactName" placeholder="Full name">
+        </div>
+        <div class="field">
+          <label class="field-label" for="contactPhone">Phone</label>
+          <input type="text" id="contactPhone" placeholder="+1 555 000 0000">
+        </div>
+        <div class="field">
+          <label class="field-label" for="contactEmail">Email</label>
+          <input type="text" id="contactEmail" placeholder="name@example.com">
+        </div>
+        <div class="field-hint">Sent as a standard vCard the receiver's phone can save directly.</div>
+      </div>
+
+      <!-- File panel -->
+      <div class="send-panel hidden" data-panel="file">
+        <div class="field">
+          <div class="drop-zone" id="dropZone" tabindex="0" role="button" aria-label="Choose a file">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" style="margin-bottom:8px"><path d="M12 16V4M12 4l-4 4M12 4l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <div><strong>Tap to choose a file</strong><br>or drag one here</div>
+            <div class="field-hint">Images, PDFs, text, JSON, and other small files</div>
+          </div>
+          <input type="file" id="fileInput" class="hidden" aria-hidden="true">
+        </div>
+        <div class="card hidden" id="fileSummaryCard">
+          <div class="file-summary">
+            <span class="file-icon" id="fileIconWrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            </span>
+            <div class="meta">
+              <div class="name" id="fileName">—</div>
+              <div class="detail" id="fileDetail">—</div>
+            </div>
+          </div>
+        </div>
+        <div class="banner warn hidden" id="fileSizeBanner">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3l9 16H3L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span id="fileSizeBannerText"></span>
+        </div>
+      </div>
+
+      <!-- Options common to all types -->
+      <div class="card">
+        <div class="toggle-row">
+          <div>
+            <div class="t-label">Compress before sending</div>
+            <div class="t-sub">Fewer QR frames for compressible data</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="compressToggle" checked>
+            <span class="track"></span><span class="thumb"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <div>
+            <div class="t-label">Password protect</div>
+            <div class="t-sub">AES-256-GCM, key never leaves this device</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="passwordToggle">
+            <span class="track"></span><span class="thumb"></span>
+          </label>
+        </div>
+        <div class="field hidden" id="passwordField" style="margin-top:14px">
+          <label class="field-label" for="passwordInput">Password</label>
+          <input type="password" id="passwordInput" placeholder="Choose a password for the receiver">
+          <div class="field-hint">Share this password with the receiver some other way. It is never included in the QR data.</div>
+        </div>
+        <div class="field" style="margin-top:14px;margin-bottom:0">
+          <span class="field-label" id="densityLabel">QR density</span>
+          <div class="tab-row" id="densityRow" role="tablist" aria-label="QR density" aria-labelledby="densityLabel">
+            <button class="tab-btn" data-density="low" role="tab">Low</button>
+            <button class="tab-btn active" data-density="medium" role="tab" aria-selected="true">Medium</button>
+            <button class="tab-btn" data-density="high" role="tab">High</button>
+          </div>
+          <div class="field-hint">Lower density = fewer bytes per frame but easier for the receiver's camera to read.</div>
+        </div>
+      </div>
+
+      <div id="sendEstimate" class="banner info hidden"></div>
+
+      <button class="btn btn-primary" id="generateBtn">Generate QR codes</button>
+    </section>
+
+    <!-- ============ QR DISPLAY (sending) ============ -->
+    <section class="view" id="view-qr" aria-labelledby="qrHeading">
+      <div class="view-header">
+        <button class="back-btn" data-nav="send" aria-label="Back">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <h2 id="qrHeading">Show this to the receiver</h2>
+      </div>
+
+      <div class="qr-stage">
+        <div class="qr-frame bracket-frame">
+          <span class="bl"></span><span class="br"></span>
+          <div id="qrCanvasHost"></div>
+        </div>
+        <div class="qr-index" id="qrIndexLabel">Frame <strong>1</strong> / 1</div>
+        <div class="progress-track" style="width:100%;max-width:280px">
+          <div class="progress-fill" id="sendProgressFill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="transport-controls" id="multiControls">
+        <button class="transport-btn" id="prevFrameBtn" aria-label="Previous frame">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/></svg>
+        </button>
+        <button class="transport-btn primary" id="playPauseBtn" aria-label="Play">
+          <svg id="playIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7L8 5Z"/></svg>
+          <svg id="pauseIcon" class="hidden" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+        </button>
+        <button class="transport-btn" id="nextFrameBtn" aria-label="Next frame">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="speed-row">
+        <label for="speedRange">Frame speed</label>
+        <input type="range" id="speedRange" min="150" max="1200" step="50" value="450">
+        <span class="mono muted" id="speedLabel">450 ms</span>
+      </div>
+
+      <div class="card" style="margin-top:20px">
+        <div class="status-line"><span class="dot"></span>Transfer ID <span class="mono" id="transferIdLabel">—</span></div>
+        <div class="status-line"><span class="dot"></span><span id="qrMetaLine">—</span></div>
+      </div>
+
+      <div class="card">
+        <div class="t-label" style="margin-bottom:6px">Missing chunks on the receiver?</div>
+        <div class="field-hint" style="margin-bottom:12px">If the receiver reports gaps, jump straight to a chunk to replay it.</div>
+        <div class="field" style="margin-bottom:10px">
+          <input type="text" id="jumpToChunk" placeholder="e.g. 4, 7, 12">
+        </div>
+        <button class="btn btn-secondary" id="replayMissingBtn">Replay listed chunks</button>
+      </div>
+
+      <button class="btn btn-ghost" id="newTransferBtn">Start a new transfer</button>
+    </section>
+
+    <!-- ============ RECEIVE ============ -->
+    <section class="view" id="view-receive" aria-labelledby="receiveHeading">
+      <div class="view-header">
+        <button class="back-btn" data-nav="home" aria-label="Back">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <h2 id="receiveHeading">Receive data</h2>
+      </div>
+
+      <div class="banner error hidden" id="cameraErrorBanner"></div>
+
+      <div class="viewfinder" id="viewfinderWrap">
+        <video id="scanVideo" playsinline muted aria-label="Camera preview"></video>
+        <canvas id="scanCanvas" aria-hidden="true"></canvas>
+        <div class="viewfinder-mask">
+          <div class="scan-window">
+            <div class="corner tl"></div><div class="corner tr"></div>
+            <div class="corner bl2"></div><div class="corner br2"></div>
+            <div class="scan-line"></div>
+          </div>
+        </div>
+        <div class="viewfinder-topbar">
+          <button id="switchCameraBtn" aria-label="Switch camera">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 7h3l1.5-2h7L17 7h3v12H4V7Z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.2" stroke="white" stroke-width="1.8"/></svg>
+          </button>
+        </div>
+        <div class="viewfinder-hint" id="viewfinderHint">Point the camera at the sender's screen</div>
+      </div>
+
+      <div class="card" id="receiveProgressCard" style="margin-top:16px">
+        <div class="status-line" id="receiveStatusLine"><span class="dot"></span><span id="receiveStatusText">Waiting for the first QR code…</span></div>
+        <div class="progress-track">
+          <div class="progress-fill" id="receiveProgressFill" style="width:0%"></div>
+        </div>
+        <div class="field-hint" id="receiveCountText">0 / 0 chunks</div>
+        <div class="chunk-grid" id="chunkGrid" aria-label="Chunk status"></div>
+      </div>
+
+      <div class="card hidden" id="passwordPromptCard">
+        <div class="t-label" style="margin-bottom:8px">This transfer is password protected</div>
+        <input type="password" id="receivePasswordInput" placeholder="Enter password">
+        <button class="btn btn-primary" id="submitPasswordBtn" style="margin-top:10px">Unlock</button>
+        <div class="field-hint" id="passwordErrorText" style="color:var(--danger)"></div>
+      </div>
+
+      <button class="btn btn-ghost" id="cancelReceiveBtn">Cancel and clear</button>
+    </section>
+
+    <!-- ============ RESULT ============ -->
+    <section class="view" id="view-result" aria-labelledby="resultHeading">
+      <div class="view-header">
+        <h2 id="resultHeading" class="hidden">Transfer complete</h2>
+      </div>
+      <div id="resultSuccessBlock">
+        <div class="result-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4 10-10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h2 class="center" style="margin:0 0 4px">Transfer complete</h2>
+        <p class="center muted" id="resultSubtitle">Data verified with SHA-256</p>
+
+        <div class="card" style="margin-top:22px">
+          <div class="file-summary">
+            <span class="file-icon" id="resultIconWrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            </span>
+            <div class="meta">
+              <div class="name" id="resultName">—</div>
+              <div class="detail" id="resultDetail">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="resultPreviewWrap"></div>
+
+        <div class="btn-row" style="margin-top:18px">
+          <button class="btn btn-secondary" id="resultOpenBtn">Open</button>
+          <button class="btn btn-primary" id="resultDownloadBtn">Download</button>
+        </div>
+        <button class="btn btn-ghost" id="resultShareBtn" style="margin-top:10px">Share</button>
+      </div>
+
+      <div id="resultFailBlock" class="hidden">
+        <div class="banner error" id="resultFailBanner"></div>
+      </div>
+
+      <button class="btn btn-ghost" id="resultDoneBtn" style="margin-top:16px">Back to home</button>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">🔒 100% client-side · 📡 no internet · ☁ no cloud</footer>
+</div>
+
+<!-- Third-party QR libraries. These are only fetched once — the service
+     worker caches them for full offline use afterward. For strict
+     no-CDN-at-runtime deployments, download them and point these two
+     <script> tags at local copies instead (see README, "Vendoring the
+     QR libraries"). -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.js" defer></script>
+
+<script src="js/utils.js" defer></script>
+<script src="js/crypto.js" defer></script>
+<script src="js/compression.js" defer></script>
+<script src="js/chunk-manager.js" defer></script>
+<script src="js/file-handler.js" defer></script>
+<script src="js/qr-generator.js" defer></script>
+<script src="js/qr-scanner.js" defer></script>
+<script src="js/sender.js" defer></script>
+<script src="js/receiver.js" defer></script>
+<script src="js/app.js" defer></script>
+</body>
+</html>
