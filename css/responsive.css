@@ -1,0 +1,23 @@
+/* responsive.css */
+
+@media (min-width: 560px) {
+  .app-shell {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    min-height: calc(100vh - 48px);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero h1 { font-size: 25px; }
+  .action-tile { min-height: 130px; padding: 18px 12px 14px; }
+  #qrCanvasHost { width: 220px; height: 220px; }
+}
+
+@media (max-height: 700px) {
+  .viewfinder { max-height: 50vh; }
+}
