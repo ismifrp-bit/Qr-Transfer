@@ -50,16 +50,30 @@ const QrScanner = (() => {
 
     try {
       stream = await navigator.mediaDevices.getUserMedia(constraints);
+      currentDeviceId = deviceId || (stream.getVideoTracks()[0] && stream.getVideoTracks()[0].getSettings().deviceId);
+      videoEl.srcObject = stream;
+      await videoEl.play();
     } catch (e) {
-      if (e.name === 'NotAllowedError' || e.name === 'PermissionDeniedError') {
+      if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+      if (e.name === 'NotAllowedError' || e.name === 'PermissionDeniedError' || e.name === 'SecurityError') {
         throw new Error('CAMERA_DENIED');
       }
-      throw new Error('CAMERA_ERROR');
+      if (e.name === 'NotFoundError' || e.name === 'DevicesNotFoundError') {
+        throw new Error('CAMERA_NOT_FOUND');
+      }
+      if (e.name === 'NotReadableError' || e.name === 'TrackStartError') {
+        throw new Error('CAMERA_IN_USE');
+      }
+      if (e.name === 'OverconstrainedError' || e.name === 'ConstraintNotSatisfiedError') {
+        throw new Error('CAMERA_CONSTRAINTS');
+      }
+      // Surface the real browser message instead of a generic fallback,
+      // since unmapped errors are exactly what's hardest to debug remotely.
+      const err = new Error('CAMERA_ERROR');
+      err.detail = `${e.name || 'Error'}: ${e.message || e}`;
+      throw err;
     }
 
-    currentDeviceId = deviceId || (stream.getVideoTracks()[0] && stream.getVideoTracks()[0].getSettings().deviceId);
-    videoEl.srcObject = stream;
-    await videoEl.play();
     scanning = true;
     tick();
   }
@@ -115,3 +129,4 @@ const QrScanner = (() => {
 
   return { start, pause, resume, stop, switchCamera, listCameras };
 })();
+  
