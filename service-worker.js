@@ -2,8 +2,8 @@
 // with no network at all after the first successful visit.
 'use strict';
 
-const CACHE_VERSION = 'qr-transfer-v1';
-const RUNTIME_CACHE = 'qr-transfer-runtime-v1';
+const CACHE_VERSION = 'qr-transfer-v2';
+const RUNTIME_CACHE = 'qr-transfer-runtime-v2';
 
 const APP_SHELL = [
   './',
@@ -85,3 +85,4 @@ self.addEventListener('fetch', (event) => {
     }
   })());
 });
+  
