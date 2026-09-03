@@ -33,11 +33,14 @@ const Receiver = (() => {
       const messages = {
         CAMERA_DENIED: 'Camera permission is required to scan QR codes. Allow camera access in your browser settings and try again.',
         CAMERA_UNSUPPORTED: 'Your browser does not support camera access. Please use a modern browser such as Chrome, Edge, or Safari.',
-        CAMERA_ERROR: 'Could not start the camera. It may be in use by another app.'
+        CAMERA_NOT_FOUND: 'No camera was found on this device.',
+        CAMERA_IN_USE: 'The camera seems to be in use by another app. Close other camera/video apps and try again.',
+        CAMERA_CONSTRAINTS: 'This device could not satisfy the camera settings requested. Trying a different camera may help.',
+        CAMERA_ERROR: 'Could not start the camera.' + (e.detail ? ` (${e.detail})` : '')
       };
       const banner = $('cameraErrorBanner');
       banner.classList.remove('hidden');
-      banner.textContent = messages[e.message] || 'Could not access the camera.';
+      banner.textContent = messages[e.message] || ('Could not access the camera.' + (e.detail ? ` (${e.detail})` : ''));
     }
   }
 
@@ -239,3 +242,4 @@ const Receiver = (() => {
 
   return { init, stopCamera };
 })();
+    
